@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/missionsListFragment">
+
+    <fragment
+        android:id="@+id/missionsListFragment"
+        android:name="com.spacex_rocket_launches.presentation.mission_list.MissionsListFragment"
+        android:label="fragment_missions_list"
+        tools:layout="@layout/fragment_missions_list" >
+        <action
+            android:id="@+id/action_missionsListFragment_to_missionDetailsFragment"
+            app:destination="@id/missionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/missionDetailsFragment"
+        android:name="com.spacex_rocket_launches.presentation.mission_details.MissionDetailsFragment"
+        android:label="fragment_mission_details"
+        tools:layout="@layout/fragment_mission_details" >
+        <action
+            android:id="@+id/action_finish_missionDetailsFragment"
+            app:popUpTo="@id/missionDetailsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
