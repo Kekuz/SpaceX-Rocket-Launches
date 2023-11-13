@@ -14,12 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        Creator.provideTrackInteractor().searchLaunch(LaunchRequestFilter.body, object : LaunchInteractor.LaunchConsumer {
-            override fun consume(foundLaunches: List<Launch>) {
-                Log.e("Launches", foundLaunches.toString())
-            }
-        })
     }
 
 
