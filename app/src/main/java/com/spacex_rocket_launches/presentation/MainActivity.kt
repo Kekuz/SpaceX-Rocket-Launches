@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import com.spacex_rocket_launches.Creator
 import com.spacex_rocket_launches.R
+import com.spacex_rocket_launches.databinding.ActivityMainBinding
+import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
 import com.spacex_rocket_launches.domain.api.LaunchInteractor
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
 

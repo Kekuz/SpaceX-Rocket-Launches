@@ -19,9 +19,5 @@
         android:name="com.spacex_rocket_launches.presentation.mission_details.MissionDetailsFragment"
         android:label="fragment_mission_details"
         tools:layout="@layout/fragment_mission_details" >
-        <action
-            android:id="@+id/action_finish_missionDetailsFragment"
-            app:popUpTo="@id/missionDetailsFragment"
-            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
