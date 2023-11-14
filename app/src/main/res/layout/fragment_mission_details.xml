@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.mission_details.MissionDetailsFragment">
+    tools:context=".presentation.details.LaunchDetailsFragment">
 
     <Button
         android:id="@+id/go_back_btn"

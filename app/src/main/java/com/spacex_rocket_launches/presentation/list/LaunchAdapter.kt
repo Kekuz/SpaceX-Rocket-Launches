@@ -1,4 +1,4 @@
-package com.spacex_rocket_launches.presentation.mission_list
+package com.spacex_rocket_launches.presentation.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ class LaunchAdapter (private val launches: List<Launch>, private val onClick: (L
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
-        holder.bind(launches[position], onClick)
+        holder.bind(launches[position], position, onClick)
     }
 
     override fun getItemCount(): Int {

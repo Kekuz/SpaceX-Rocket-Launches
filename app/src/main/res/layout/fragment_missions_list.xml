@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.mission_list.MissionsListFragment">
+    tools:context=".presentation.list.LaunchListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/launches_rv"

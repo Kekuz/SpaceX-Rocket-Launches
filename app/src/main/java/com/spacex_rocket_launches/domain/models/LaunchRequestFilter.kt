@@ -10,7 +10,7 @@ object LaunchRequestFilter {
     val body = RequestBody(
         Query(DateUtc("2021-00-00T00:00:00.000Z")),
         Options(
-            10,
+            40,
             1,
             Sort("desc")
         )

@@ -1,4 +1,4 @@
-package com.spacex_rocket_launches.presentation
+package com.spacex_rocket_launches.presentation.list
 
 import android.os.Handler
 import android.os.Looper
@@ -11,18 +11,18 @@ import com.spacex_rocket_launches.domain.api.LaunchInteractor
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
 
-open class MainViewModel : ViewModel() {
+open class LaunchListViewModel : ViewModel() {
 
     private val _launchesLiveData by lazy {
         MutableLiveData<List<Launch>>()
     }
     val launchesLiveData: LiveData<List<Launch>> = _launchesLiveData
 
-
     private val handler = Handler(Looper.getMainLooper())
     private var detailsRunnable: Runnable? = null
 
     private val launches = ArrayList<Launch>()
+    lateinit var currentLaunch: Launch
 
 
     init {

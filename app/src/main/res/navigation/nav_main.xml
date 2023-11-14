@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/missionsListFragment"
-        android:name="com.spacex_rocket_launches.presentation.mission_list.MissionsListFragment"
+        android:name="com.spacex_rocket_launches.presentation.list.LaunchListFragment"
         android:label="fragment_missions_list"
         tools:layout="@layout/fragment_missions_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/missionDetailsFragment"
-        android:name="com.spacex_rocket_launches.presentation.mission_details.MissionDetailsFragment"
+        android:name="com.spacex_rocket_launches.presentation.details.LaunchDetailsFragment"
         android:label="fragment_mission_details"
         tools:layout="@layout/fragment_mission_details" >
     </fragment>

@@ -29,11 +29,11 @@ class LaunchRepositoryImpl(private val networkClient: NetworkClient) : LaunchRep
                     it.name ?: "-",
                     //Тут может быть null в строке
                     it.success.toString(),
-                    it.links.patch.small ?: "",
+                    it.links.patch.small ?: "-",
                     //it.cores.sumOf { return@sumOf it.flight },
                     0,
                     dateFormat.format(it.date_unix * TO_MILLIS),
-                    it.links.patch.large ?: "",
+                    it.links.patch.large ?: "-",
                     it.details ?: "-",
                     timeDateFormat.format(it.date_unix * TO_MILLIS),
                     it.crew,
