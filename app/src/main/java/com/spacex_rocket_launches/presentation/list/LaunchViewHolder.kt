@@ -13,7 +13,7 @@ class LaunchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val name: TextView = itemView.findViewById(R.id.name)
     private val image: ImageView = itemView.findViewById(R.id.image)
 
-    fun bind(model: Launch, position: Int, onClick: (Launch) -> Unit) {
+    fun bind(model: Launch, onClick: (Launch) -> Unit) {
         name.text = model.name
 
         image.load(model.missionIcon) {

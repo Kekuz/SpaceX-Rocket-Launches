@@ -16,14 +16,12 @@ import com.spacex_rocket_launches.domain.models.Launch
 class LaunchListFragment : Fragment() {
 
     private lateinit var binding: FragmentMissionsListBinding
-    //private val viewModel: MainViewModel by activityViewModels()
     private lateinit var viewModel: LaunchListViewModel
 
     private val onClick: (Launch) -> Unit =
         {
             SingletonLaunch.launch = it
             findNavController().navigate(R.id.action_missionsListFragment_to_missionDetailsFragment)
-            //Тут мы должны сделать запрос списка космонавтов
         }
 
 

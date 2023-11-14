@@ -14,7 +14,7 @@ class LaunchAdapter (private val launches: List<Launch>, private val onClick: (L
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
-        holder.bind(launches[position], position, onClick)
+        holder.bind(launches[position], onClick)
     }
 
     override fun getItemCount(): Int {
