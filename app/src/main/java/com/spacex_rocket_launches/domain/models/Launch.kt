@@ -4,7 +4,7 @@ data class Launch(
     val name: String,
     val status: String,
     val missionIcon: String,
-    val repeatedUsesFirstStage: Int,
+    val repeatedUsesFirstStage: String,
     val launchDate: String, //ДД-ММ-ГГГГ
     val missionLogo: String,
     val details: String,

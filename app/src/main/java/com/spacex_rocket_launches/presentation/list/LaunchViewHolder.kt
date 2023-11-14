@@ -3,27 +3,48 @@ package com.spacex_rocket_launches.presentation.list
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.spacex_rocket_launches.R
+import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
+import com.spacex_rocket_launches.databinding.LaunchViewBinding
 import com.spacex_rocket_launches.domain.models.Launch
 
-class LaunchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class LaunchViewHolder(private val binding: LaunchViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(model: Launch, onClick: (Launch) -> Unit) = with(binding) {
 
-    private val name: TextView = itemView.findViewById(R.id.name)
-    private val image: ImageView = itemView.findViewById(R.id.image)
+        nameTv.text = model.name
 
-    fun bind(model: Launch, onClick: (Launch) -> Unit) {
-        name.text = model.name
-
-        image.load(model.missionIcon) {
-            crossfade(true)
-            placeholder(R.drawable.baseline_question_mark_24)
-            error(R.drawable.baseline_question_mark_24)
-            //transformations(CircleCropTransformation())
+        if(model.repeatedUsesFirstStage != "-"){
+            repeatedUsesFirstStageTv.text = model.repeatedUsesFirstStage
+        }else{
+            repeatedUsesFirstStageTv.isVisible = false
+            repeatedUsesFirstStageStaticTv.isVisible = false
         }
 
-        itemView.setOnClickListener{
+        if(model.status != "-"){
+            statusTv.text = model.status
+        }else{
+            statusTv.isVisible = false
+            statusStaticTv.isVisible = false
+        }
+
+        if(model.launchDate != "-"){
+            launchDateTv.text = model.launchDate
+        }else{
+            launchDateTv.isVisible = false
+            launchDateStaticTv.isVisible = false
+        }
+
+
+        missionIconIv.load(model.missionIcon) {
+            crossfade(true)
+            placeholder(R.drawable.place_holder_icon)
+            error(R.drawable.place_holder_icon)
+        }
+
+        itemViewCl.setOnClickListener {
             onClick.invoke(model)
         }
     }

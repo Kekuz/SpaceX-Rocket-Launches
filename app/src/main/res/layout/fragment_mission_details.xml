@@ -1,40 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.details.LaunchDetailsFragment">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/go_back_btn"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go back"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".presentation.details.LaunchDetailsFragment">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/launchDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/missionTimeDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.91" />
 
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/arrow_back_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/title_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/arrow_back_iv"
+            app:layout_constraintTop_toTopOf="@+id/arrow_back_iv"
+            tools:text="Name" />
+
+        <ImageView
+            android:id="@+id/missionLogo_iv"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:padding="16dp"
+            android:src="@drawable/place_holder_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+
+        <TextView
+            android:id="@+id/repeatedUsesFirstStage_tv"
+            style="@style/main_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/missionLogo_iv"
+            tools:text="The number of repeated uses of the first stage: 5" />
+
+
+        <TextView
+
+            android:id="@+id/status_tv"
+            style="@style/main_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Status: True"
+            app:layout_constraintTop_toBottomOf="@+id/repeatedUsesFirstStage_tv" />
+
+
+        <TextView
+            android:id="@+id/details_tv"
+            style="@style/main_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Details: long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text "
+            app:layout_constraintTop_toBottomOf="@+id/status_tv" />
+
+
+        <TextView
+            android:id="@+id/missionTimeDate_tv"
+            style="@style/main_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Date and time of the mission: 00:00 01.01.2000"
+            app:layout_constraintTop_toBottomOf="@+id/details_tv" />
+
+
+        <TextView
+            android:id="@+id/crew_list_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

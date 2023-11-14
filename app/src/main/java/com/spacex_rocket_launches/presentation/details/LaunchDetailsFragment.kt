@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import coil.load
+import com.spacex_rocket_launches.R
 import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
 import com.spacex_rocket_launches.domain.models.Launch
@@ -33,14 +36,53 @@ class LaunchDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.goBackBtn.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
-        binding.name.text = currentLaunch.name
-        binding.details.text = currentLaunch.details
-        binding.missionTimeDate.text = currentLaunch.missionTimeDate
-        binding.launchDate.text = currentLaunch.launchDate
+        with(binding) {
+            arrowBackIv.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            nameTv.text = currentLaunch.name
+            if (currentLaunch.missionLogo != "-") {
+                missionLogoIv.load(currentLaunch.missionLogo) {
+                    crossfade(true)
+                    placeholder(R.drawable.place_holder_icon)
+                    error(R.drawable.place_holder_icon)
+                    //transformations(CircleCropTransformation())
+                }
+            } else {
+                missionLogoIv.isVisible = false
+            }
+
+            if (currentLaunch.repeatedUsesFirstStage != "-") {
+                repeatedUsesFirstStageTv.text =
+                    "The number of repeated uses of the first stage: ${currentLaunch.repeatedUsesFirstStage}"
+            } else {
+                repeatedUsesFirstStageTv.isVisible = false
+            }
+
+            if (currentLaunch.status != "-") {
+                statusTv.text =
+                    "Status: ${currentLaunch.status}"
+            } else {
+                statusTv.isVisible = false
+            }
+
+            if (currentLaunch.details != "-") {
+                detailsTv.text =
+                    "Status: ${currentLaunch.details}"
+            } else {
+                detailsTv.isVisible = false
+            }
+
+            if (currentLaunch.missionTimeDate != "-") {
+                missionTimeDateTv.text =
+                    "Status: ${currentLaunch.missionTimeDate}"
+            } else {
+                missionTimeDateTv.isVisible = false
+            }
+
+        }
 
 
     }

@@ -1,6 +1,7 @@
 package com.spacex_rocket_launches.presentation.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class LaunchListFragment : Fragment() {
     private val onClick: (Launch) -> Unit =
         {
             SingletonLaunch.launch = it
+            Log.e("Launch", it.toString())
             findNavController().navigate(R.id.action_missionsListFragment_to_missionDetailsFragment)
         }
 

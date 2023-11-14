@@ -27,11 +27,9 @@ class LaunchRepositoryImpl(private val networkClient: NetworkClient) : LaunchRep
                 //Нужно обязательно разобраться с типами!!!!
                 Launch(
                     it.name ?: "-",
-                    //Тут может быть null в строке
-                    it.success.toString(),
+                    it.success?.toString()?.replaceFirstChar { s -> s.uppercase() } ?: "-",
                     it.links.patch.small ?: "-",
-                    //it.cores.sumOf { return@sumOf it.flight },
-                    0,
+                    it.cores[0].flight?.toString() ?: "-",
                     dateFormat.format(it.date_unix * TO_MILLIS),
                     it.links.patch.large ?: "-",
                     it.details ?: "-",
