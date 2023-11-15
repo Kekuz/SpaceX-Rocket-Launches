@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".presentation.details.LaunchDetailsFragment">
+        tools:context=".ui.details.LaunchDetailsFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

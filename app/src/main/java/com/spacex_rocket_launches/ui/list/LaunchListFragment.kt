@@ -1,14 +1,10 @@
-package com.spacex_rocket_launches.presentation.list
+package com.spacex_rocket_launches.ui.list
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnScrollChangeListener
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -20,6 +16,7 @@ import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionsListBinding
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
+import com.spacex_rocket_launches.presentation.list.LaunchListViewModel
 import com.spacex_rocket_launches.presentation.model.SingletoneHasNextPageInfo
 
 class LaunchListFragment : Fragment() {

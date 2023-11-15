@@ -1,9 +1,8 @@
-package com.spacex_rocket_launches.presentation.list
+package com.spacex_rocket_launches.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.spacex_rocket_launches.R
 import com.spacex_rocket_launches.databinding.LaunchViewBinding
 import com.spacex_rocket_launches.domain.models.Launch
 

@@ -1,4 +1,4 @@
-package com.spacex_rocket_launches.presentation.details
+package com.spacex_rocket_launches.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,8 @@ import coil.load
 import com.spacex_rocket_launches.R
 import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
-import com.spacex_rocket_launches.domain.models.Launch
+import com.spacex_rocket_launches.presentation.details.LaunchDetailsViewModel
+import com.spacex_rocket_launches.presentation.details.LaunchFactory
 
 class LaunchDetailsFragment : Fragment() {
 
