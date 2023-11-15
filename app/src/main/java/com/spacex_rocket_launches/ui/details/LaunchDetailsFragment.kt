@@ -1,11 +1,13 @@
 package com.spacex_rocket_launches.ui.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import coil.load
@@ -14,6 +16,7 @@ import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
 import com.spacex_rocket_launches.presentation.details.LaunchDetailsViewModel
 import com.spacex_rocket_launches.presentation.details.LaunchFactory
+import com.spacex_rocket_launches.ui.list.LaunchAdapter
 
 class LaunchDetailsFragment : Fragment() {
 
@@ -80,6 +83,12 @@ class LaunchDetailsFragment : Fragment() {
                     "Date and time of the mission: ${currentLaunch.missionTimeDate}"
             } else {
                 missionTimeDateTv.isVisible = false
+            }
+
+            viewModel.pilotsLiveData.observe(activity as LifecycleOwner) {
+                crewListRv.adapter = PilotAdapter(it)
+                Log.e("Crew", it.toString())
+                //binding.pagingPb.isVisible = false
             }
 
         }

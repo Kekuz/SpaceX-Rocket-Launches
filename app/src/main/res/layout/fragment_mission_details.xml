@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingTop="16dp"
         tools:context=".ui.details.LaunchDetailsFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -24,6 +24,7 @@
             android:id="@+id/arrow_back_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +44,7 @@
             android:id="@+id/missionLogo_iv"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            android:layout_marginHorizontal="16dp"
             android:padding="16dp"
             android:src="@drawable/place_holder_icon"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +56,7 @@
             style="@style/main_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,11 +70,12 @@
             style="@style/main_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Status: True"
-            app:layout_constraintTop_toBottomOf="@+id/repeatedUsesFirstStage_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/repeatedUsesFirstStage_tv"
+            tools:text="Status: True" />
 
 
         <TextView
@@ -79,11 +83,12 @@
             style="@style/main_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Details: long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text "
-            app:layout_constraintTop_toBottomOf="@+id/status_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/status_tv"
+            tools:text="Details: long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text " />
 
 
         <TextView
@@ -91,20 +96,42 @@
             style="@style/main_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Date and time of the mission: 00:00 01.01.2000"
-            app:layout_constraintTop_toBottomOf="@+id/details_tv" />
-
+            app:layout_constraintTop_toBottomOf="@+id/details_tv"
+            tools:text="Date and time of the mission: 00:00 01.01.2000" />
 
         <TextView
-            android:id="@+id/crew_list_tv"
-            android:layout_width="0dp"
+            android:id="@+id/textView2"
+            style="@style/title_text_style"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Crew:"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/missionTimeDate_tv" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/crew_list_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:itemCount="3"
+            tools:listitem="@layout/pilot_view" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/crew_list_rv" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

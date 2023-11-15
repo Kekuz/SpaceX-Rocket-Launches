@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_view_cl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin= "8dp"
+    android:background="@drawable/launch_view_shape"
+    android:elevation="6dp"
+    android:padding="16dp">
+
+
+
+
+    <TextView
+        android:id="@+id/pilot_name_static_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pilot_name_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pilot_name_static_tv"
+        app:layout_constraintTop_toTopOf="@+id/pilot_name_static_tv"
+        tools:text="Douglas Hurley" />
+
+    <TextView
+        android:id="@+id/agency_static_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Agency:"
+        app:layout_constraintStart_toStartOf="@+id/pilot_name_static_tv"
+        app:layout_constraintTop_toBottomOf="@+id/pilot_name_static_tv" />
+
+    <TextView
+        android:id="@+id/agency_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/agency_static_tv"
+        app:layout_constraintTop_toTopOf="@+id/agency_static_tv"
+        tools:text="NASA" />
+
+    <TextView
+        android:id="@+id/pilot_status_static_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Status:"
+        app:layout_constraintStart_toStartOf="@+id/pilot_name_static_tv"
+        app:layout_constraintTop_toBottomOf="@+id/agency_static_tv" />
+
+    <TextView
+        android:id="@+id/pilot_status_tv"
+        style="@style/main_ellipsize_text_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pilot_status_static_tv"
+        app:layout_constraintTop_toTopOf="@+id/pilot_status_static_tv"
+        tools:text="Active" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
