@@ -2,12 +2,16 @@ package com.spacex_rocket_launches.data.repository
 
 import android.util.Log
 import com.spacex_rocket_launches.data.NetworkClient
-import com.spacex_rocket_launches.data.network.dto.LaunchSearchRequest
-import com.spacex_rocket_launches.data.network.dto.LaunchSearchResponse
+import com.spacex_rocket_launches.data.network.dto.launch.LaunchSearchRequest
+import com.spacex_rocket_launches.data.network.dto.launch.LaunchSearchResponse
 import com.spacex_rocket_launches.domain.api.reposiory.LaunchRepository
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchResponse
-import com.spacex_rocket_launches.domain.models.launch_request_body.RequestBody
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchDateUtc
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchOptions
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchQuery
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchRequestBody
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchSort
 import com.spacex_rocket_launches.util.Resource
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -19,8 +23,8 @@ class LaunchRepositoryImpl(private val networkClient: NetworkClient) : LaunchRep
     private val timeDateFormat =
         SimpleDateFormat("HH-mm dd-MM-yyyy", Locale.US)//ЧЧ-ММ ДД-ММ-ГГГГ
 
-    override fun search(body: RequestBody): Resource<LaunchResponse> {
-        val response = networkClient.doRequest(LaunchSearchRequest(body))
+    override fun search(page: Int): Resource<LaunchResponse> {
+        val response = networkClient.doRequest(LaunchSearchRequest(makeBody(page)))
         Log.d("response", response.toString())
         return when (response.resultCode) {
             -1 -> {
@@ -47,8 +51,22 @@ class LaunchRepositoryImpl(private val networkClient: NetworkClient) : LaunchRep
         }
     }
 
+    private fun makeBody(page: Int): LaunchRequestBody {
+        return LaunchRequestBody(
+            LaunchQuery(LaunchDateUtc(MAX_DATE)),
+            LaunchOptions(
+                MISSIONS_ON_PAGE,
+                page,
+                LaunchSort(SORT_TYPE)
+            )
+        )
+    }
+
     private companion object {
         const val TO_MILLIS = 1000L
+        const val MAX_DATE = "2021-00-00T00:00:00.000Z"
+        const val MISSIONS_ON_PAGE = 10
+        const val SORT_TYPE = "desc"
     }
 
 }

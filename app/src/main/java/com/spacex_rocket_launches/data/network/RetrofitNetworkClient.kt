@@ -6,11 +6,11 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.spacex_rocket_launches.data.NetworkClient
-import com.spacex_rocket_launches.data.network.dto.LaunchSearchRequest
+import com.spacex_rocket_launches.data.network.dto.crew.CrewSearchRequest
+import com.spacex_rocket_launches.data.network.dto.launch.LaunchSearchRequest
 import com.spacex_rocket_launches.data.network.dto.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.Exception
 
 class RetrofitNetworkClient(private val context: Context) : NetworkClient {
     private val baseUrl = "https://api.spacexdata.com"
@@ -27,14 +27,24 @@ class RetrofitNetworkClient(private val context: Context) : NetworkClient {
         if (!isConnected()) {
             return Response().apply { resultCode = -1 }
         }
-        if (dto !is LaunchSearchRequest) {
-            return Response().apply { resultCode = 400 }
+
+        if (dto is LaunchSearchRequest) {
+            val resp = spaceXService.searchLaunches(dto.body).execute()
+            val body = resp.body()
+
+            return body?.apply { resultCode = 200 } ?: Response().apply { resultCode = resp.code() }
+        }
+        if(dto is CrewSearchRequest){
+            val resp = spaceXService.searchCrew(dto.body).execute()
+            val body = resp.body()
+
+            return body?.apply { resultCode = 200 } ?: Response().apply { resultCode = resp.code() }
         }
 
-        val resp = spaceXService.search(dto.body).execute()
-        val body = resp.body()
+        return Response().apply { resultCode = 400 }
 
-        return body?.apply { resultCode = 200 } ?: Response().apply { resultCode = resp.code() }
+
+
 
     }
     @RequiresApi(Build.VERSION_CODES.M)

@@ -87,7 +87,7 @@ class LaunchDetailsFragment : Fragment() {
 
             viewModel.pilotsLiveData.observe(activity as LifecycleOwner) {
                 crewListRv.adapter = PilotAdapter(it)
-                Log.e("Crew", it.toString())
+
                 //binding.pagingPb.isVisible = false
             }
 

@@ -1,17 +1,17 @@
 package com.spacex_rocket_launches.domain.impl
 
-import com.spacex_rocket_launches.domain.api.LaunchInteractor
+import com.spacex_rocket_launches.domain.api.usecase.SearchLaunchUseCase
 import com.spacex_rocket_launches.domain.api.reposiory.LaunchRepository
-import com.spacex_rocket_launches.domain.models.launch_request_body.RequestBody
+import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchRequestBody
 import com.spacex_rocket_launches.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LaunchInteractorImpl(private val repository: LaunchRepository): LaunchInteractor {
-    override fun searchLaunch(body:RequestBody, consumer: LaunchInteractor.LaunchConsumer) {
+class SearchLaunchUseCaseImpl(private val repository: LaunchRepository): SearchLaunchUseCase {
+    override fun execute(page: Int, consumer: SearchLaunchUseCase.LaunchConsumer) {
         CoroutineScope(Dispatchers.IO).launch {
-            when(val resource = repository.search(body)) {
+            when(val resource = repository.search(page)) {
                 is Resource.Success -> { consumer.consume(resource.data, null) }
                 is Resource.Error -> { consumer.consume(null, resource.message) }
             }

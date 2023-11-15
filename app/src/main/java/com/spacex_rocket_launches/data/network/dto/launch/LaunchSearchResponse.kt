@@ -1,6 +1,6 @@
-package com.spacex_rocket_launches.data.network.dto
+package com.spacex_rocket_launches.data.network.dto.launch
 
-import com.spacex_rocket_launches.data.network.dto.launch.LaunchDto
+import com.spacex_rocket_launches.data.network.dto.Response
 
 data class LaunchSearchResponse(
     val docs: List<LaunchDto>,

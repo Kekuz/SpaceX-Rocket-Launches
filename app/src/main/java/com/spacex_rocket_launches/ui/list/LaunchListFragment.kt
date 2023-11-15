@@ -15,9 +15,7 @@ import com.spacex_rocket_launches.R
 import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionsListBinding
 import com.spacex_rocket_launches.domain.models.Launch
-import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
 import com.spacex_rocket_launches.presentation.list.LaunchListViewModel
-import com.spacex_rocket_launches.presentation.model.SingletoneHasNextPageInfo
 
 class LaunchListFragment : Fragment() {
 
@@ -73,11 +71,9 @@ class LaunchListFragment : Fragment() {
             }
 
         }
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
             if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-                if (SingletoneHasNextPageInfo.hasNextPage) {
-                    LaunchRequestFilter.body.options.page++
-                    Log.d("Page", "Loaded page ${LaunchRequestFilter.body.options.page.toString()}")
+                if(viewModel.hasNextPage && !viewModel.sending){
                     binding.pagingPb.isVisible = true
                     viewModel.doRequest()
                 }

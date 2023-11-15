@@ -5,12 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.spacex_rocket_launches.util.Creator
-import com.spacex_rocket_launches.domain.api.LaunchInteractor
+import com.spacex_rocket_launches.domain.api.usecase.SearchLaunchUseCase
 import com.spacex_rocket_launches.domain.models.Launch
-import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
 import com.spacex_rocket_launches.domain.models.LaunchResponse
-import com.spacex_rocket_launches.presentation.model.SingletonLaunch
-import com.spacex_rocket_launches.presentation.model.SingletoneHasNextPageInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +22,9 @@ open class LaunchListViewModel : ViewModel() {
 
 
     private val launches = ArrayList<Launch>()
+    var sending = false
+    var hasNextPage = true
+    private var pageNumber = 1
 
 
     init {
@@ -32,21 +32,25 @@ open class LaunchListViewModel : ViewModel() {
     }
 
     fun doRequest() {
-        Creator.provideTrackInteractor()
-            .searchLaunch(LaunchRequestFilter.body, object : LaunchInteractor.LaunchConsumer {
+        sending = true
+        Creator.provideLaunchInteractor()
+            .execute(pageNumber, object : SearchLaunchUseCase.LaunchConsumer {
                 override fun consume(foundLaunchResponse: LaunchResponse?, errorMessage: String?) {
                     CoroutineScope(Dispatchers.IO).launch {
                         if (foundLaunchResponse != null) {
+                            Log.d("Launches", foundLaunchResponse.toString())
+                            Log.e("Page", "Loaded page $pageNumber")
                             launches.addAll(foundLaunchResponse.docs)
                             _launchesLiveData.postValue(launches)
-                            SingletoneHasNextPageInfo.hasNextPage = foundLaunchResponse.hasNextPage
-                            Log.d("Launches", foundLaunchResponse.toString())
+                            hasNextPage = foundLaunchResponse.hasNextPage
+                            if (hasNextPage) pageNumber++
                         }
                         if (errorMessage != null) {
                             _placeholderLiveData.postValue(errorMessage.toString())
                         } else {
                             _placeholderLiveData.postValue("-")
                         }
+                        sending = false
                     }
 
                 }
