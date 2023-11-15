@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_white"
     tools:context=".ui.list.LaunchListFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -17,13 +18,16 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:paddingTop="8dp"
                 android:id="@+id/launches_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ProgressBar
+                android:paddingVertical="16dp"
                 android:id="@+id/paging_pb"
+                android:indeterminateTint="@color/gray"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -47,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="64dp"
-        android:backgroundTint="@color/text_gray"
-        android:text="Reconnect"
+        android:backgroundTint="@color/gray"
+        android:text="@string/reconnect"
         android:visibility="gone" />
 
 </FrameLayout>

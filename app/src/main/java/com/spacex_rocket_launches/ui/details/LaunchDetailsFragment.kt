@@ -45,6 +45,13 @@ class LaunchDetailsFragment : Fragment() {
             arrowBackIv.setOnClickListener {
                 findNavController().popBackStack()
             }
+            //Чтоб не пропал
+            crewListRv.adapter = PilotAdapter(listOf())
+
+            //Чтоб пропал
+            if(viewModel.isCrewEmpty){
+                loadingCrewPb.isVisible = false
+            }
 
             nameTv.text = currentLaunch.name
             if (currentLaunch.missionLogo != "-") {
@@ -59,36 +66,36 @@ class LaunchDetailsFragment : Fragment() {
 
             if (currentLaunch.repeatedUsesFirstStage != "-") {
                 repeatedUsesFirstStageTv.text =
-                    "The number of repeated uses of the first stage: ${currentLaunch.repeatedUsesFirstStage}"
+                    "${getString(R.string.number_of_flight_full_phrase)} ${currentLaunch.repeatedUsesFirstStage}"
             } else {
                 repeatedUsesFirstStageTv.isVisible = false
             }
 
             if (currentLaunch.status != "-") {
                 statusTv.text =
-                    "Status: ${currentLaunch.status}"
+                    "${getString(R.string.success)} ${currentLaunch.status}"
             } else {
                 statusTv.isVisible = false
             }
 
             if (currentLaunch.details != "-") {
                 detailsTv.text =
-                    "Details: ${currentLaunch.details}"
+                    "${getString(R.string.details)} ${currentLaunch.details}"
             } else {
                 detailsTv.isVisible = false
             }
 
             if (currentLaunch.missionTimeDate != "-") {
                 missionTimeDateTv.text =
-                    "Date and time of the mission: ${currentLaunch.missionTimeDate}"
+                    "${getString(R.string.date_time_mission)} ${currentLaunch.missionTimeDate}"
             } else {
                 missionTimeDateTv.isVisible = false
             }
 
             viewModel.pilotsLiveData.observe(activity as LifecycleOwner) {
                 crewListRv.adapter = PilotAdapter(it)
-
-                //binding.pagingPb.isVisible = false
+                binding.crewTv.isVisible = true
+                binding.loadingCrewPb.isVisible = false
             }
 
         }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LaunchDetailsViewModel(private val launch: Launch): ViewModel() {
+class LaunchDetailsViewModel(private val launch: Launch) : ViewModel() {
 
     private val _pilotsLiveData = MutableLiveData<List<Pilot>>()
     val pilotsLiveData: LiveData<List<Pilot>> = _pilotsLiveData
@@ -20,13 +20,16 @@ class LaunchDetailsViewModel(private val launch: Launch): ViewModel() {
     private val _placeholderLiveData = MutableLiveData<String>()
     val placeholderLiveData: LiveData<String> = _placeholderLiveData
 
+    val isCrewEmpty = launch.crew.isEmpty()
+
     private val pilots = ArrayList<Pilot>()
+
     init {
         doRequest()
     }
 
     private fun doRequest() {
-        if(launch.crew.isNotEmpty()){
+        if(!isCrewEmpty){
             Creator.provideCrewInteractor()
                 .execute(launch.crew, object : SearchCrewUseCase.CrewConsumer {
                     override fun consume(foundPilots: List<Pilot>?, errorMessage: String?) {
@@ -34,7 +37,6 @@ class LaunchDetailsViewModel(private val launch: Launch): ViewModel() {
                             if (foundPilots != null) {
                                 pilots.addAll(foundPilots)
                                 _pilotsLiveData.postValue(pilots)
-                                Log.d("Pilots", foundPilots.toString())
                             }
                             if (errorMessage != null) {
                                 _placeholderLiveData.postValue(errorMessage.toString())
@@ -46,7 +48,5 @@ class LaunchDetailsViewModel(private val launch: Launch): ViewModel() {
                     }
                 })
         }
-
-
     }
 }

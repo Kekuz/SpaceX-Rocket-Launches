@@ -15,7 +15,7 @@ class CrewRepositoryImpl(private val networkClient: NetworkClient) : CrewReposit
 
     override fun search(ids: List<String>): Resource<List<Pilot>> {
         val response = networkClient.doRequest(CrewSearchRequest(makeBody(ids)))
-        Log.d("response", response.toString())
+        Log.d("response result:", response.toString())
         return when (response.resultCode) {
             -1 -> {
                 Resource.Error("Check internet connection")
@@ -26,7 +26,7 @@ class CrewRepositoryImpl(private val networkClient: NetworkClient) : CrewReposit
                     Pilot(
                         it.name ?: "-",
                         it.agency ?: "-",
-                        it.status ?: "",
+                        it.status.toString().replaceFirstChar{ s -> s.uppercase() }  ?: "-",
                     )
                 })
             }

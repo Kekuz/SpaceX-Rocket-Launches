@@ -21,7 +21,7 @@ class LaunchRepositoryImpl(private val networkClient: NetworkClient) : LaunchRep
         SimpleDateFormat("dd-MM-yyyy", Locale.US)//ДД-ММ-ГГГГ
 
     private val timeDateFormat =
-        SimpleDateFormat("HH-mm dd-MM-yyyy", Locale.US)//ЧЧ-ММ ДД-ММ-ГГГГ
+        SimpleDateFormat("HH:mm dd-MM-yyyy", Locale.US)//ЧЧ-ММ ДД-ММ-ГГГГ
 
     override fun search(page: Int): Resource<LaunchResponse> {
         val response = networkClient.doRequest(LaunchSearchRequest(makeBody(page)))

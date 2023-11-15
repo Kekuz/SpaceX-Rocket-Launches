@@ -2,4 +2,15 @@
     <string name="app_name">SpaceX-Rocket-Launches</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crew">Crew:</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="number_of_flight">Number of flight:</string>
+    <string name="success">Success:</string>
+    <string name="launch_date">Launch date:</string>
+    <string name="name">Name:</string>
+    <string name="agency">Agency:</string>
+    <string name="status">Status:</string>
+    <string name="number_of_flight_full_phrase">The number of repeated uses of the first stage:</string>
+    <string name="details">Details:</string>
+    <string name="date_time_mission">Date and time of the mission:</string>
 </resources>
