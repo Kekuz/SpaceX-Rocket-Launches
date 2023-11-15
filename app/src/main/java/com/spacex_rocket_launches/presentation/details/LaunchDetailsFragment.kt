@@ -70,14 +70,14 @@ class LaunchDetailsFragment : Fragment() {
 
             if (currentLaunch.details != "-") {
                 detailsTv.text =
-                    "Status: ${currentLaunch.details}"
+                    "Details: ${currentLaunch.details}"
             } else {
                 detailsTv.isVisible = false
             }
 
             if (currentLaunch.missionTimeDate != "-") {
                 missionTimeDateTv.text =
-                    "Status: ${currentLaunch.missionTimeDate}"
+                    "Date and time of the mission: ${currentLaunch.missionTimeDate}"
             } else {
                 missionTimeDateTv.isVisible = false
             }
