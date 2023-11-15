@@ -1,7 +1,5 @@
 package com.spacex_rocket_launches.presentation.list
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,24 +8,20 @@ import com.spacex_rocket_launches.util.Creator
 import com.spacex_rocket_launches.domain.api.LaunchInteractor
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 open class LaunchListViewModel : ViewModel() {
 
-    private val _launchesLiveData by lazy {
-        MutableLiveData<List<Launch>>()
-    }
+    private val _launchesLiveData = MutableLiveData<List<Launch>>()
     val launchesLiveData: LiveData<List<Launch>> = _launchesLiveData
 
-    private val _placeholderLiveData by lazy {
-        MutableLiveData<String>()
-    }
+    private val _placeholderLiveData = MutableLiveData<String>()
     val placeholderLiveData: LiveData<String> = _placeholderLiveData
 
-    private val handler = Handler(Looper.getMainLooper())
-    private var detailsRunnable: Runnable? = null
 
     private val launches = ArrayList<Launch>()
-    lateinit var currentLaunch: Launch
 
 
     init {
@@ -38,25 +32,19 @@ open class LaunchListViewModel : ViewModel() {
         Creator.provideTrackInteractor()
             .searchLaunch(LaunchRequestFilter.body, object : LaunchInteractor.LaunchConsumer {
                 override fun consume(foundLaunches: List<Launch>?, errorMessage: String?) {
-                    //Log.e("Launches", foundLaunches.toString())
-                    val currentRunnable = detailsRunnable
-                    if (currentRunnable != null) {
-                        handler.removeCallbacks(currentRunnable)
-                    }
-                    val newDetailsRunnable = Runnable {
-
+                    CoroutineScope(Dispatchers.IO).launch {
                         if (foundLaunches != null) {
                             launches.addAll(foundLaunches)
-                            _launchesLiveData.value = launches
+                            _launchesLiveData.postValue(launches)
+                            Log.e("Launches", foundLaunches.toString())
                         }
                         if (errorMessage != null) {
-                            _placeholderLiveData.value = errorMessage.toString()
+                            _placeholderLiveData.postValue(errorMessage.toString())
                         } else {
-                            _placeholderLiveData.value = "-"
+                            _placeholderLiveData.postValue("-")
                         }
                     }
-                    detailsRunnable = newDetailsRunnable
-                    handler.post(newDetailsRunnable)
+
                 }
             })
     }

@@ -16,27 +16,9 @@ class LaunchViewHolder(private val binding: LaunchViewBinding) : RecyclerView.Vi
 
         nameTv.text = model.name
 
-        if(model.repeatedUsesFirstStage != "-"){
-            repeatedUsesFirstStageTv.text = model.repeatedUsesFirstStage
-        }else{
-            repeatedUsesFirstStageTv.isVisible = false
-            repeatedUsesFirstStageStaticTv.isVisible = false
-        }
-
-        if(model.status != "-"){
-            statusTv.text = model.status
-        }else{
-            statusTv.isVisible = false
-            statusStaticTv.isVisible = false
-        }
-
-        if(model.launchDate != "-"){
-            launchDateTv.text = model.launchDate
-        }else{
-            launchDateTv.isVisible = false
-            launchDateStaticTv.isVisible = false
-        }
-
+        repeatedUsesFirstStageTv.text = model.repeatedUsesFirstStage
+        statusTv.text = model.status
+        launchDateTv.text = model.launchDate
 
         missionIconIv.load(model.missionIcon) {
             crossfade(true)
