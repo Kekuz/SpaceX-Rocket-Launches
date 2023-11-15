@@ -7,6 +7,6 @@ interface LaunchInteractor {
     fun searchLaunch(body: RequestBody, consumer: LaunchConsumer)
 
     interface LaunchConsumer {
-        fun consume(foundLaunches: List<Launch>)
+        fun consume(foundLaunches: List<Launch>?, errorMessage: String?)
     }
 }

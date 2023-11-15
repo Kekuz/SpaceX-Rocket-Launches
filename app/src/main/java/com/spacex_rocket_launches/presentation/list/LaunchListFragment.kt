@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +45,16 @@ class LaunchListFragment : Fragment() {
 
         viewModel.launchesLiveData.observe(activity as LifecycleOwner) {
             binding.launchesRv.adapter = LaunchAdapter(it, onClick)
+        }
+
+        viewModel.placeholderLiveData.observe(activity as LifecycleOwner){
+            if(it != "-"){
+                binding.placeholderErrorTv.isVisible = true
+                binding.placeholderErrorTv.text = it
+            }else{
+                binding.placeholderErrorTv.isVisible = false
+            }
+
         }
 
     }

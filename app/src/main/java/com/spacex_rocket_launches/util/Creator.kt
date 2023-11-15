@@ -1,5 +1,6 @@
-package com.spacex_rocket_launches
+package com.spacex_rocket_launches.util
 
+import android.content.Context
 import com.spacex_rocket_launches.data.network.RetrofitNetworkClient
 import com.spacex_rocket_launches.data.repository.LaunchRepositoryImpl
 import com.spacex_rocket_launches.domain.api.LaunchInteractor
@@ -7,8 +8,12 @@ import com.spacex_rocket_launches.domain.api.reposiory.LaunchRepository
 import com.spacex_rocket_launches.domain.impl.LaunchInteractorImpl
 
 object Creator {
+    private lateinit var appContext: Context
+    fun initAppContext(context: Context) {
+        appContext = context
+    }
     private fun getTrackRepository(): LaunchRepository {
-        return LaunchRepositoryImpl(RetrofitNetworkClient())
+        return LaunchRepositoryImpl(RetrofitNetworkClient(appContext))
     }
 
     fun provideTrackInteractor(): LaunchInteractor {
