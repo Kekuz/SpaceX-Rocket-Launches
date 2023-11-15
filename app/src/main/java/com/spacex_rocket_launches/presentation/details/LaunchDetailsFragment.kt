@@ -48,7 +48,6 @@ class LaunchDetailsFragment : Fragment() {
                     crossfade(true)
                     placeholder(R.drawable.place_holder_icon)
                     error(R.drawable.place_holder_icon)
-                    //transformations(CircleCropTransformation())
                 }
             } else {
                 missionLogoIv.isVisible = false

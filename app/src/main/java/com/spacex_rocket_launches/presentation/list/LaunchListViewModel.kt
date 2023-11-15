@@ -8,6 +8,9 @@ import com.spacex_rocket_launches.util.Creator
 import com.spacex_rocket_launches.domain.api.LaunchInteractor
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchRequestFilter
+import com.spacex_rocket_launches.domain.models.LaunchResponse
+import com.spacex_rocket_launches.presentation.model.SingletonLaunch
+import com.spacex_rocket_launches.presentation.model.SingletoneHasNextPageInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,15 +31,16 @@ open class LaunchListViewModel : ViewModel() {
         doRequest()
     }
 
-    private fun doRequest() {
+    fun doRequest() {
         Creator.provideTrackInteractor()
             .searchLaunch(LaunchRequestFilter.body, object : LaunchInteractor.LaunchConsumer {
-                override fun consume(foundLaunches: List<Launch>?, errorMessage: String?) {
+                override fun consume(foundLaunchResponse: LaunchResponse?, errorMessage: String?) {
                     CoroutineScope(Dispatchers.IO).launch {
-                        if (foundLaunches != null) {
-                            launches.addAll(foundLaunches)
+                        if (foundLaunchResponse != null) {
+                            launches.addAll(foundLaunchResponse.docs)
                             _launchesLiveData.postValue(launches)
-                            Log.e("Launches", foundLaunches.toString())
+                            SingletoneHasNextPageInfo.hasNextPage = foundLaunchResponse.hasNextPage
+                            Log.d("Launches", foundLaunchResponse.toString())
                         }
                         if (errorMessage != null) {
                             _placeholderLiveData.postValue(errorMessage.toString())
