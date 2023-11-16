@@ -40,7 +40,7 @@ open class LaunchListViewModel(
                     CoroutineScope(Dispatchers.IO).launch {
                         if (foundLaunchResponse != null) {
                             Log.d("Launches", foundLaunchResponse.toString())
-                            Log.e("Page", "Loaded page $pageNumber")
+                            Log.d("Page", "Loaded page $pageNumber")
                             launches.addAll(foundLaunchResponse.docs)
                             _launchesLiveData.postValue(launches)
                             hasNextPage = foundLaunchResponse.hasNextPage
