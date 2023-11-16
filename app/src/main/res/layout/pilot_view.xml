@@ -10,9 +10,9 @@
     android:layout_marginBottom="8dp"
     android:background="@drawable/launch_view_shape"
     android:elevation="6dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:padding="16dp">
-
-
 
 
     <TextView

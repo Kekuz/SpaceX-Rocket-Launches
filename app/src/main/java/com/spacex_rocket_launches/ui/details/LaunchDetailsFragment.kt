@@ -16,12 +16,15 @@ import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
 import com.spacex_rocket_launches.presentation.details.LaunchDetailsViewModel
 import com.spacex_rocket_launches.presentation.details.LaunchDetailsFactory
+import com.spacex_rocket_launches.util.Debounce
 import javax.inject.Inject
 
 class LaunchDetailsFragment : Fragment() {
 
     @Inject
     lateinit var launchListFactory: LaunchDetailsFactory
+    @Inject
+    lateinit var debounce: Debounce
 
     private lateinit var binding: FragmentMissionDetailsBinding
     private val currentLaunch = SingletonLaunch.launch
@@ -47,7 +50,9 @@ class LaunchDetailsFragment : Fragment() {
 
         with(binding) {
             arrowBackIv.setOnClickListener {
-                findNavController().popBackStack()
+                if(debounce.clickDebounce()){
+                    findNavController().popBackStack()
+                }
             }
             //Чтоб не пропал
             crewListRv.adapter = PilotAdapter(listOf())
@@ -113,7 +118,6 @@ class LaunchDetailsFragment : Fragment() {
             }
 
         }
-
 
     }
 

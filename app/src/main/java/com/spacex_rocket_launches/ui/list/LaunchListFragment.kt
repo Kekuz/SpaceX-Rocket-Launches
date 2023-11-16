@@ -18,6 +18,7 @@ import com.spacex_rocket_launches.databinding.FragmentMissionsListBinding
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.presentation.list.LaunchListFactory
 import com.spacex_rocket_launches.presentation.list.LaunchListViewModel
+import com.spacex_rocket_launches.util.Debounce
 import javax.inject.Inject
 
 class LaunchListFragment : Fragment() {
@@ -25,14 +26,20 @@ class LaunchListFragment : Fragment() {
     @Inject
     lateinit var launchListFactory: LaunchListFactory
 
+    @Inject
+    lateinit var debounce: Debounce
+
     private lateinit var binding: FragmentMissionsListBinding
     private lateinit var viewModel: LaunchListViewModel
 
     private val onClick: (Launch) -> Unit =
         {
-            SingletonLaunch.launch = it
-            Log.d("Launch", it.toString())
-            findNavController().navigate(R.id.action_missionsListFragment_to_missionDetailsFragment)
+            if(debounce.clickDebounce()){
+                SingletonLaunch.launch = it
+                Log.d("Launch", it.toString())
+                findNavController().navigate(R.id.action_missionsListFragment_to_missionDetailsFragment)
+            }
+
         }
 
 
@@ -80,7 +87,7 @@ class LaunchListFragment : Fragment() {
         }
         binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
             if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-                if(viewModel.hasNextPage && !viewModel.sending){
+                if (viewModel.hasNextPage && !viewModel.sending) {
                     binding.pagingPb.isVisible = true
                     viewModel.doRequest()
                 }

@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background_white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+
         tools:context=".ui.details.LaunchDetailsFragment">
 
 
         <ImageView
             android:id="@+id/arrow_back_iv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:foreground="?attr/selectableItemBackground"
             android:src="@drawable/arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,9 +29,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/arrow_back_iv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/arrow_back_iv"
-            app:layout_constraintTop_toTopOf="@+id/arrow_back_iv"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Name" />
 
         <ImageView
@@ -42,7 +44,7 @@
             android:src="@drawable/place_holder_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/arrow_back_iv" />
 
         <TextView
             android:id="@+id/repeatedUsesFirstStage_tv"
@@ -97,22 +99,22 @@
             tools:text="Date and time of the mission: 00:00 01.01.2000" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/crew_tv"
             style="@style/title_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/crew"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/missionTimeDate_tv" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="8dp"
             android:id="@+id/crew_list_rv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,25 +123,25 @@
             tools:listitem="@layout/pilot_view" />
 
         <ProgressBar
-            android:indeterminateTint="@color/gray"
             android:id="@+id/loading_crew_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/crew_list_rv" />
 
         <TextView
             android:id="@+id/error_placeholder_tv"
+            style="@style/title_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/title_text_style"
             android:layout_marginTop="16dp"
             android:visibility="gone"
-            tools:text="Error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/crew_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/crew_tv"
+            tools:text="Error" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
