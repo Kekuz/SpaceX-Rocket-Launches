@@ -12,12 +12,18 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.spacex_rocket_launches.R
+import com.spacex_rocket_launches.app.App
 import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionsListBinding
 import com.spacex_rocket_launches.domain.models.Launch
+import com.spacex_rocket_launches.presentation.list.LaunchListFactory
 import com.spacex_rocket_launches.presentation.list.LaunchListViewModel
+import javax.inject.Inject
 
 class LaunchListFragment : Fragment() {
+
+    @Inject
+    lateinit var launchListFactory: LaunchListFactory
 
     private lateinit var binding: FragmentMissionsListBinding
     private lateinit var viewModel: LaunchListViewModel
@@ -34,8 +40,9 @@ class LaunchListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity?.applicationContext as App).appComponent.inject(this)
         binding = FragmentMissionsListBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[LaunchListViewModel::class.java]
+        viewModel = ViewModelProvider(this, launchListFactory)[LaunchListViewModel::class.java]
 
 
         return binding.root

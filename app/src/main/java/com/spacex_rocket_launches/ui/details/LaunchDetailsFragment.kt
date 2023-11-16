@@ -1,7 +1,6 @@
 package com.spacex_rocket_launches.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +11,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.spacex_rocket_launches.R
+import com.spacex_rocket_launches.app.App
 import com.spacex_rocket_launches.presentation.model.SingletonLaunch
 import com.spacex_rocket_launches.databinding.FragmentMissionDetailsBinding
 import com.spacex_rocket_launches.presentation.details.LaunchDetailsViewModel
-import com.spacex_rocket_launches.presentation.details.LaunchFactory
-import com.spacex_rocket_launches.ui.list.LaunchAdapter
+import com.spacex_rocket_launches.presentation.details.LaunchDetailsFactory
+import javax.inject.Inject
 
 class LaunchDetailsFragment : Fragment() {
+
+    @Inject
+    lateinit var launchListFactory: LaunchDetailsFactory
 
     private lateinit var binding: FragmentMissionDetailsBinding
     private val currentLaunch = SingletonLaunch.launch
@@ -28,11 +31,12 @@ class LaunchDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity?.applicationContext as App).appComponent.inject(this)
         binding = FragmentMissionDetailsBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(
             this,
-            LaunchFactory(currentLaunch)
+            launchListFactory
         )[LaunchDetailsViewModel::class.java]
 
         return binding.root
@@ -96,6 +100,16 @@ class LaunchDetailsFragment : Fragment() {
                 crewListRv.adapter = PilotAdapter(it)
                 binding.crewTv.isVisible = true
                 binding.loadingCrewPb.isVisible = false
+            }
+
+            viewModel.placeholderLiveData.observe(activity as LifecycleOwner){
+                if (it != "-") {
+                    binding.crewTv.isVisible = true
+                    binding.errorPlaceholderTv.isVisible = true
+                    binding.errorPlaceholderTv.text = it
+
+                    binding.loadingCrewPb.isVisible = false
+                }
             }
 
         }

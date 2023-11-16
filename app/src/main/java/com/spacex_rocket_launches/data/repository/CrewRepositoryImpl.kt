@@ -26,7 +26,7 @@ class CrewRepositoryImpl(private val networkClient: NetworkClient) : CrewReposit
                     Pilot(
                         it.name ?: "-",
                         it.agency ?: "-",
-                        it.status.toString().replaceFirstChar{ s -> s.uppercase() }  ?: "-",
+                        it.status?.replaceFirstChar{ s -> s.uppercase() }  ?: "-",
                     )
                 })
             }

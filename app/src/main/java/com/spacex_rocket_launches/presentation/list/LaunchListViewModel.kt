@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.spacex_rocket_launches.util.Creator
 import com.spacex_rocket_launches.domain.api.usecase.SearchLaunchUseCase
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchResponse
@@ -12,7 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-open class LaunchListViewModel : ViewModel() {
+open class LaunchListViewModel(
+    private val searchLaunchUseCase: SearchLaunchUseCase
+) : ViewModel() {
 
     private val _launchesLiveData = MutableLiveData<List<Launch>>()
     val launchesLiveData: LiveData<List<Launch>> = _launchesLiveData
@@ -33,7 +34,7 @@ open class LaunchListViewModel : ViewModel() {
 
     fun doRequest() {
         sending = true
-        Creator.provideLaunchInteractor()
+        searchLaunchUseCase
             .execute(pageNumber, object : SearchLaunchUseCase.LaunchConsumer {
                 override fun consume(foundLaunchResponse: LaunchResponse?, errorMessage: String?) {
                     CoroutineScope(Dispatchers.IO).launch {
