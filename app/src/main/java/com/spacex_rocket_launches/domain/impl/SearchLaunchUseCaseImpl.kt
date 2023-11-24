@@ -2,7 +2,6 @@ package com.spacex_rocket_launches.domain.impl
 
 import com.spacex_rocket_launches.domain.api.usecase.SearchLaunchUseCase
 import com.spacex_rocket_launches.domain.api.reposiory.LaunchRepository
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchRequestBody
 import com.spacex_rocket_launches.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,6 @@
 package com.spacex_rocket_launches.domain.api.usecase
 
 import com.spacex_rocket_launches.domain.models.LaunchResponse
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchRequestBody
 
 interface SearchLaunchUseCase {
     fun execute(page: Int, consumer: LaunchConsumer)

@@ -6,9 +6,9 @@ import com.spacex_rocket_launches.data.network.dto.crew.CrewSearchRequest
 import com.spacex_rocket_launches.data.network.dto.crew.CrewSearchResponse
 import com.spacex_rocket_launches.domain.api.reposiory.CrewRepository
 import com.spacex_rocket_launches.domain.models.Pilot
-import com.spacex_rocket_launches.domain.models.crew_request_body.CrewId
-import com.spacex_rocket_launches.domain.models.crew_request_body.CrewQuery
-import com.spacex_rocket_launches.domain.models.crew_request_body.CrewRequestBody
+import com.spacex_rocket_launches.data.network.dto.crew.crew_request_body.CrewId
+import com.spacex_rocket_launches.data.network.dto.crew.crew_request_body.CrewQuery
+import com.spacex_rocket_launches.data.network.dto.crew.crew_request_body.CrewRequestBody
 import com.spacex_rocket_launches.util.Resource
 
 class CrewRepositoryImpl(private val networkClient: NetworkClient) : CrewRepository {
@@ -35,7 +35,7 @@ class CrewRepositoryImpl(private val networkClient: NetworkClient) : CrewReposit
         }
     }
 
-    private fun makeBody(ids: List<String>): CrewRequestBody{
+    private fun makeBody(ids: List<String>): CrewRequestBody {
         return CrewRequestBody(CrewQuery(CrewId(ids)))
     }
 }

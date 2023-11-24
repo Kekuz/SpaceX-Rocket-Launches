@@ -7,11 +7,11 @@ import com.spacex_rocket_launches.data.network.dto.launch.LaunchSearchResponse
 import com.spacex_rocket_launches.domain.api.reposiory.LaunchRepository
 import com.spacex_rocket_launches.domain.models.Launch
 import com.spacex_rocket_launches.domain.models.LaunchResponse
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchDateUtc
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchOptions
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchQuery
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchRequestBody
-import com.spacex_rocket_launches.domain.models.launch_request_body.LaunchSort
+import com.spacex_rocket_launches.data.network.dto.launch.launch_request_body.LaunchDateUtc
+import com.spacex_rocket_launches.data.network.dto.launch.launch_request_body.LaunchOptions
+import com.spacex_rocket_launches.data.network.dto.launch.launch_request_body.LaunchQuery
+import com.spacex_rocket_launches.data.network.dto.launch.launch_request_body.LaunchRequestBody
+import com.spacex_rocket_launches.data.network.dto.launch.launch_request_body.LaunchSort
 import com.spacex_rocket_launches.util.Resource
 import java.text.SimpleDateFormat
 import java.util.Locale
